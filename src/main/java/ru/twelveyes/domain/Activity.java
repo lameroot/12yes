@@ -6,34 +6,23 @@ import org.springframework.data.neo4j.annotation.GraphProperty;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by lameroot on 22.01.14.
  */
-@NodeEntity(partial = true)
-@Entity
-@Table(name = "activity")
-@Inheritance(strategy = InheritanceType.JOINED)
+@NodeEntity
 public class Activity {
 
     @GraphId
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "activity_id")
     private Long id;
     @GraphProperty
-    @Column(name = "title")
     private String title;
-    @Transient
     @RelatedTo(type = "ACTIVITY", direction = Direction.INCOMING)
     private Set<Activity> parents;
-    @Transient
     @RelatedTo(type = "ACTIVITY", direction = Direction.OUTGOING)
     private Set<Activity> child;
-    @Transient
     @RelatedTo(type = "COMPANY", direction = Direction.BOTH)
     private Set<Company> companies;
 

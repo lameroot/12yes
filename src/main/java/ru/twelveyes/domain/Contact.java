@@ -1,30 +1,16 @@
 package ru.twelveyes.domain;
 
-import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by lameroot on 28.12.13.
  */
-@Entity
-@Table(name = "contact")
 public class Contact {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "second_name")
     private String secondName;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_avatar_id",nullable = true)
     private MediaContent avatar;
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "content_contact",joinColumns = {
-            @JoinColumn(name = "fk_contact_id",nullable = false,updatable = false)},
-        inverseJoinColumns = {@JoinColumn(name = "fk_content_id",nullable = false,updatable = false)})
     private List<MediaContent> contents;
 
     private String emails;

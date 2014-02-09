@@ -1,23 +1,15 @@
 package ru.twelveyes.domain;
 
-import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by lameroot on 11.01.14.
  */
-@Embeddable
 public class YesCompleted {
 
-    @Column(name = "report_description")
     private String reportDescription;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_company_id",nullable = true)
     private Company company;
-    @Column(name = "completed_at",nullable = false)
     private Date completedAt = new Date();
-    @Column(name = "completed_budget")
     private Double completedBudget;
 
     public String getReportDescription() {

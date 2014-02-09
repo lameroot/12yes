@@ -11,12 +11,10 @@
             http://www.springframework.org/schema/data/neo4j
             http://www.springframework.org/schema/data/neo4j/spring-neo4j.xsd">
 
-    <!--
+
     <context:spring-configured/>
     <context:annotation-config/>
-    -->
-    <neo4j:config storeDirectory="data/graph.db" base-package="ru.twelveyes.domain" entityManagerFactory=""/>
 
-
+    <neo4j:config storeDirectory="data/graph.db"/>
 
 </beans>

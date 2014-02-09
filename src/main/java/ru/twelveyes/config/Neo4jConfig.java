@@ -1,30 +1,34 @@
 package ru.twelveyes.config;
 
 import org.neo4j.kernel.EmbeddedGraphDatabase;
-import org.springframework.context.annotation.*;
+import org.neo4j.server.WrappingNeoServerBootstrapper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
-import org.springframework.data.neo4j.core.GraphDatabase;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Created by lameroot on 17.01.14.
  */
 @Configuration
-//@ImportResource(value = {"classpath:spring/neo4j-spring.xml"})
-@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
-public class Neo4jConfig extends Neo4jConfiguration{
+@EnableTransactionManagement
+@EnableNeo4jRepositories(basePackages = "ru.twelveyes.repository")
+public class Neo4jConfig extends Neo4jConfiguration {
+
+    private static final String DB_PATH = "data/graph.db";
 
     @Bean
     public EmbeddedGraphDatabase graphDatabaseService() {
-        EmbeddedGraphDatabase graphDatabase = new EmbeddedGraphDatabase("data/graph.db");
-
+        EmbeddedGraphDatabase graphDatabase = new EmbeddedGraphDatabase(DB_PATH);
         return graphDatabase;
     }
 
-//    @Override
-//    @Bean(name = "neo4jTransactionManager")
-//    public PlatformTransactionManager neo4jTransactionManager() throws Exception {
-//        return super.neo4jTransactionManager();
+//    @Bean
+//    public WrappingNeoServerBootstrapper neo4jWebServer() {
+//        WrappingNeoServerBootstrapper server = new WrappingNeoServerBootstrapper(graphDatabaseService());
+//        server.start();
+//        return server;
 //    }
 }

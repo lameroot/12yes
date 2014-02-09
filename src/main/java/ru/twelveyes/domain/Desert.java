@@ -1,31 +1,18 @@
 package ru.twelveyes.domain;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by lameroot on 12.01.14.
  * Заслуги, которые заслужил профиль
  */
-@Entity
-@Table(name = "desert")
 public class Desert {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_avatar_id", nullable = true)
     private MediaContent avatar;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_contact_id",nullable = true)
     private Contact contact;
-    @Column(name = "created_at",nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_profile_id",nullable = false,updatable = false)
     private Profile profile;
 
     public Integer getId() {

@@ -5,7 +5,6 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -14,31 +13,20 @@ import java.util.Set;
 /**
  * Created by lameroot on 28.12.13.
  */
-@NodeEntity(partial = true)
-@Entity
-@Table(name = "profile")
+@NodeEntity
 public class Profile {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @Enumerated(EnumType.STRING)
     private Sex sex;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date birthday;
     private String email;
     private String password;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_contact_id",nullable = true)
     private Contact contact;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "profile")
     private List<Desert> deserts;
-    @Transient
     @RelatedToVia(type = "RATED")
     @Fetch
     private Set<Rating> ratings;
     @RelatedToVia(type = "COMMENTED")
-    @Transient
     private Set<Comment> comments;
 
     public enum Sex {

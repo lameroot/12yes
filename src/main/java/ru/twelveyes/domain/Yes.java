@@ -4,55 +4,31 @@ import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 
-import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by lameroot on 28.12.13.
  */
-@Entity
-@Table(name = "yes")
 public class Yes {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_line_id", nullable = false,updatable = false)
     private YesLine yesLine;
     private int number;
     private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_avatar_id",nullable = true)
     private MediaContent avatar;
-    @Column(name = "is_notify")
     private boolean isNotify;
-    @Column(name = "notify_before")
     private long notifyBefore;
-    @Column(name = "is_public")
     private boolean isPublic;
-    @Column(name = "is_comment_allowed")
     private boolean isCommentAllowed;
-    @Enumerated(EnumType.STRING)
     private YesState state;
-    @Embedded
     private YesCompleted completed;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_media_album_id",nullable = true)
     private MediaAlbum mediaAlbum;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_wish_id",nullable = true)
     private Wish wish;
 
-    @Transient
     @RelatedToVia(type = "COMMENTED", direction = Direction.INCOMING)
     private Set<Comment> comments;
-
-    @Transient
     private transient Date start;
-    @Transient
     private transient Date finish;
 
     public Yes() {

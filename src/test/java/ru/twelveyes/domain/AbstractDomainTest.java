@@ -1,13 +1,13 @@
 package ru.twelveyes.domain;
 
-import ru.twelveyes.config.MysqlEntityManagerConfigTest;
+import ru.twelveyes.config.Neo4jConfigTest;
 
 import java.util.Date;
 
 /**
  * Created by lameroot on 12.01.14.
  */
-public class AbstractDomainTest extends MysqlEntityManagerConfigTest {
+public class AbstractDomainTest extends Neo4jConfigTest {
 
     protected Profile createProfile() {
         Profile profile = new Profile();

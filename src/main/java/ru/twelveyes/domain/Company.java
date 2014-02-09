@@ -1,9 +1,11 @@
 package ru.twelveyes.domain;
 
 import org.neo4j.graphdb.Direction;
-import org.springframework.data.neo4j.annotation.*;
+import org.springframework.data.neo4j.annotation.Fetch;
+import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.data.neo4j.annotation.RelatedToVia;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,44 +13,14 @@ import java.util.Set;
  * Created by lameroot on 22.01.14.
  */
 @NodeEntity(partial = true)
-@Entity
-@Table(name = "company")
-@PrimaryKeyJoinColumn(name = "fk_company_id", referencedColumnName = "activity_id")
 public class Company extends Activity {
 
-//    @GraphId
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
-//    @GraphProperty
-//    @Column(name = "title")
-//    private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_contact_id",nullable = true)
     private Contact contact;
-    @Transient
     @Fetch
     @RelatedTo(type = "COMPANY", direction = Direction.BOTH)
     private Set<Activity> activities = new HashSet<Activity>();
-    @Transient
     @Fetch @RelatedToVia(type = "RATED", direction = Direction.INCOMING)
     private Iterable<Rating> ratings;
-
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
 
     public Set<Activity> getActivities() {
         return activities;

@@ -1,32 +1,20 @@
 package ru.twelveyes.domain;
 
-import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by lameroot on 28.12.13.
  */
-@Entity
-@Table(name = "media_content")
 public class MediaContent {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String path;
-    @Column(name = "content_type")
     private String contentType;
     private long size;
-    @Column(name = "upload_at",nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     private Date uploadAt;
     private boolean moderated;
-    @Enumerated(EnumType.STRING)
     private MediaType type;
-    @Enumerated(EnumType.STRING)
     private MediaContentType mediaContentType;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_media_album_id", nullable = true)
     private MediaAlbum mediaAlbum;
 
     public enum MediaType {
