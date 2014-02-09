@@ -12,8 +12,6 @@
         <spring-data.version>1.4.2.RELEASE</spring-data.version>
         <hibernate.version>4.2.8.Final</hibernate.version>
         <mysql.version>5.1.27</mysql.version>
-        <project>22.0</project>
-        <stas>kraynov</stas>
     </properties>
 
     <dependencies>
