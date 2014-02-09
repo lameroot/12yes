@@ -12,7 +12,7 @@
         <spring-data.version>1.4.2.RELEASE</spring-data.version>
         <hibernate.version>4.2.8.Final</hibernate.version>
         <mysql.version>5.1.27</mysql.version>
-        <project>2.0</project>
+        <project>1.0</project>
     </properties>
 
     <dependencies>
