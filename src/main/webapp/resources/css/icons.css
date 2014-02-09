@@ -1,0 +1,313 @@
+.icon-money {
+	background-image: url(../images/money.png) !important;
+	background-repeat: no-repeat;
+	background-position: 100% 50%;
+}
+
+.right-align {
+	float: right;
+}
+
+.icon-airplane {
+	background-image: url(../images/airplane.png) !important;
+	background-repeat: no-repeat;
+	background-position: 100% 50%;
+}
+
+.icon-history {
+	background-image: url(../images/history.gif) !important;
+}
+
+.icon-ticket {
+	background-image: url(../images/ticket.png) !important;
+}
+
+.icon-returns {
+	background-image: url(../images/arrow-return-180.png) !important;
+}
+
+.icon-cancel {
+	background-image: url(../images/stop.png) !important;
+}
+
+.icon-mark-suspicious {
+	background-image: url(../images/marker--exclamation.png) !important;
+}
+
+.icon-mark-fraud {
+	background-image: url(../images/thief.png) !important;
+}
+
+.icon-fraud {
+	background-image: url(../images/exclamation-shield.png) !important;
+}
+
+.icon-black-passenger {
+	background-image: url(../images/user--exclamation.png) !important;
+}
+
+.icon-logout {
+	background-image: url(../images/logout.png) !important;
+}
+
+.icon-login {
+	background-image: url(../images/login.png) !important;
+}
+
+.icon-xls {
+	background-image: url(../images/document-excel.png) !important;
+}
+
+.icon-csv {
+	background-image: url(../images/document-excel-csv.png) !important;
+}
+
+.icon-ssl {
+	background-image: url(../images/lock-ssl.png) !important;
+}
+
+.icon-forward {
+	background-image: url(../images/forward.gif) !important;
+}
+
+.icon-counter {
+	height: 11px !important;
+	width: 16px !important;
+}
+
+.icon-counter-1 {
+	background-image: url(../images/notification-counter-01.png) !important;
+}
+
+.icon-counter-2 {
+	background-image: url(../images/notification-counter-02.png) !important;
+}
+
+.icon-counter-3 {
+	background-image: url(../images/notification-counter-03.png) !important;
+}
+
+.icon-counter-4 {
+	background-image: url(../images/notification-counter-04.png) !important;
+}
+
+.icon-counter-5 {
+	background-image: url(../images/notification-counter-05.png) !important;
+}
+
+.icon-counter-6 {
+	background-image: url(../images/notification-counter-06.png) !important;
+}
+
+.icon-counter-7 {
+	background-image: url(../images/notification-counter-07.png) !important;
+}
+
+.icon-counter-8 {
+	background-image: url(../images/notification-counter-08.png) !important;
+}
+
+.icon-counter-9 {
+	background-image: url(../images/notification-counter-09.png) !important;
+}
+
+.icon-counter-10 {
+	background-image: url(../images/notification-counter-10.png) !important;
+}
+
+.icon-counter-11 {
+	background-image: url(../images/notification-counter-11.png) !important;
+}
+
+.icon-counter-12 {
+	background-image: url(../images/notification-counter-12.png) !important;
+}
+
+.icon-counter-13 {
+	background-image: url(../images/notification-counter-13.png) !important;
+}
+
+.icon-counter-14 {
+	background-image: url(../images/notification-counter-14.png) !important;
+}
+
+.icon-counter-15 {
+	background-image: url(../images/notification-counter-15.png) !important;
+}
+
+.icon-counter-16 {
+	background-image: url(../images/notification-counter-16.png) !important;
+}
+
+.icon-counter-17 {
+	background-image: url(../images/notification-counter-17.png) !important;
+}
+
+.icon-counter-18 {
+	background-image: url(../images/notification-counter-18.png) !important;
+}
+
+.icon-counter-19 {
+	background-image: url(../images/notification-counter-19.png) !important;
+}
+
+.icon-counter-20 {
+	background-image: url(../images/notification-counter-20.png) !important;
+}
+
+.icon-counter-20-plus {
+	background-image: url(../images/notification-counter-20-plus.png) !important;
+}
+
+.icon-reports {
+	background-image: url(../images/reports-stack.png) !important;
+}
+
+.icon-prepare-report {
+	background-image: url(../images/report--arrow.png) !important;
+}
+
+.icon-search {
+	background-image: url(../images/magnifier.png) !important;
+}
+
+.icon-add {
+	background-image: url(../images/plus-circle.png) !important;
+}
+
+.icon-remove {
+	background-image: url(../images/cross.png) !important;
+}
+
+.icon-upload {
+	background-image: url(../images/drive-upload.png) !important;
+}
+
+.icon-refresh {
+	background-image: url(../images/refresh.gif) !important;
+}
+
+.icon-save {
+	background-image: url(../images/save.gif) !important;
+}
+
+.icon-edit {
+	background-image: url(../images/pencil.png) !important;
+}
+
+.icon-user-edit {
+	background-image: url(../images/user--pencil.png) !important;
+}
+
+.icon-user-add {
+	background-image: url(../images/user--plus.png) !important;
+}
+
+.icon-users {
+	background-image: url(../images/users.png) !important;
+}
+
+.icon-ip {
+	background-image: url(../images/network-ip.png) !important;
+}
+
+.icon-white-card {
+	background-image: url(../images/credit-card-green.png) !important;
+}
+
+.icon-black-card {
+	background-image: url(../images/credit-card--exclamation.png) !important;
+}
+
+.icon-black-email {
+	background-image: url(../images/mail_warning.png) !important;
+}
+
+.icon-success {
+	background-image: url(../images/tick.png) !important;
+}
+
+.icon-fail {
+	background-image: url(../images/prohibition.png) !important;
+}
+
+.icon-mail-send {
+	background-image: url(../images/mail-send.png) !important;
+}
+
+.icon-details {
+	background-image: url(../images/application-detail.png) !important;
+}
+
+.icon-date-trigger {
+	background-image: url('../images/pnr-trigger.png');
+}
+
+.icon-merchant {
+	background-image: url(../images/store.png) !important;
+}
+
+.icon-merchant-edit {
+	background-image: url(../images/store--pencil.png) !important;
+}
+
+.icon-merchant-add {
+	background-image: url(../images/store--plus.png) !important;
+}
+
+.icon-paymentagent {
+	background-image: url(../images/user-business.png) !important;
+}
+
+.icon-paymentagent-edit {
+	background-image: url(../images/pencil.png) !important;
+}
+
+.icon-paymentagent-add {
+	background-image: url(../images/user--plus.png) !important;
+}
+
+.icon-fraud {
+	background-image: url(../images/thief.png) !important;
+	background: none 32px 0 no-repeat;
+}
+
+.icon-route {
+	background-image: url(../images/plug.png) !important;
+}
+
+.icon-route-edit {
+	background-image: url(../images/plug--pencil.png) !important;
+}
+
+.icon-mail-template {
+	background-image: url(../images/document-template.png) !important;
+}
+
+.icon-aircraft {
+	background-image: url(../images/airplane.png) !important;
+}
+
+.icon-airport {
+	background-image: url(../images/airport.png) !important;
+}
+
+.icon-printer {
+	background-image: url(../images/printer-color.png) !important;
+}
+
+.icon-printer-edit {
+	background-image: url(../images/printer--pencil.png) !important;
+}
+
+.icon-printer-add {
+	background-image: url(../images/printer--plus.png) !important;
+}
+
+.icon-view-pan {
+	background-image: url(../images/eye.png) !important;
+}
+
+.icon-password {
+	background-image: url(../images/ui-text-field-password.png) !important;
+}

@@ -1,0 +1,90 @@
+.form-error-state {
+	font-size: 11px;
+	padding-left: 20px;
+	height: 16px;
+	line-height: 18px;
+	background: no-repeat 0 0;
+	cursor: default;
+}
+
+.form-error-state-invalid {
+	color: #C30;
+	background-image: url(../../ext/resources/themes/images/default/form/exclamation.gif);
+}
+
+.form-error-state-valid {
+	color: #090;
+	background-image: url(../../ext/resources/themes/images/default/dd/drop-yes.gif);
+}
+
+/* Error details tooltip */
+.errors-tip .error {
+	font-style: italic;
+}
+
+.alert-tip {
+	color: #c09853;
+}
+
+.success-tip {
+	color: #468847;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+}
+
+.info-tip {
+	color: #3a87ad;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+
+.danger-tip,
+.error-tip {
+	color: #b94a48;
+	background-color: #f2dede;
+	border-color: #eed3d7;
+}
+
+/*  Datalist view */
+.dataview-item {
+	cursor: pointer;
+	padding: 4px 10px 4px 10px;
+	border-bottom: 1px solid #ededed;
+
+	white-space: nowrap;
+	overflow: hidden;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+
+.dataview-item i {
+	color: #999999;
+}
+
+.dataview-item-over {
+	background-color: #ededed;
+	border-bottom-color: #dddddd;
+}
+
+.dataview-item-selected {
+	background: #e0e0e0 url(../images/arrow-right.gif) 100% 50% no-repeat;
+	border-bottom-color: #cccccc;
+}
+
+.row-fraud .x-grid-cell-inner {
+	background-color: #ff9310;
+	font-weight: bold;
+	color: green;
+}
+
+.row-fraud-warning .x-grid-cell-inner {
+	background-color: #ffee6d;
+	font-weight: bold;
+	color: green;
+}
+
+.row-fraud-alert .x-grid-cell-inner {
+	background-color: red;
+	font-weight: bold;
+	color: #000000;
+}

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<target name="init" depends="find-cmd">
+		<path id="sencha.classpath">
+			<fileset file="${cmd.dir}/sencha.jar"/>
+		</path>
+		<taskdef resource="com/sencha/ant/antlib.xml" classpathref="sencha.classpath"/>
+
+		<x-extend-classpath>
+			<jar path="${cmd.dir}/sencha.jar"/>
+		</x-extend-classpath>
+
+		<x-sencha-init/>
+	</target>
+
+	<target name="find-cmd" unless="cmd.dir">
+		<!--
+		Run "sencha which" to find the Sencha Cmd basedir and get "cmd.dir" setup. We
+		need to execute the command with curdir set properly for Cmd to pick up that we
+		are running for an application.
+		-->
+		<exec executable="sencha" dir="${basedir}">
+			<arg value="which"/>
+			<arg value="-o=$cmddir$"/>
+		</exec>
+
+		<!-- Now read the generated properties file and delete it -->
+		<property file="$cmddir$"/>
+		<delete file="$cmddir$"/>
+
+		<echo>Using Sencha Cmd from ${cmd.dir}</echo>
+	</target>
+
+	<target name="refresh">
+		<echo>Refresh app</echo>
+
+		<exec executable="sencha" dir="${app.dir}">
+			<arg value="app"/>
+			<arg value="refresh"/>
+		</exec>
+
+	</target>
+
+	<target name="compile" depends="init">
+		<echo>JS Debugging: ${js.debug}</echo>
+
+		<if>
+			<equals arg1="${js.debug}" arg2="true"/>
+			<then>
+				<property name="compression" value=""/>
+			</then>
+			<else>
+				<property name="compression" value="-${js.compiler}"/>
+			</else>
+		</if>
+
+		<echo>App dir: ${app.dir}</echo>
+		<echo>Out dir: ${app.out}</echo>
+
+		<exec executable="sencha" dir="${app.dir}">
+			<arg value="compile"/>
+			<arg value="page"/>
+			<arg value="-in"/>
+			<arg value="index.html"/>
+			<arg value="-out"/>
+			<arg value="${app.out}/index.html"/>
+			<arg value="${compression}"/>
+		</exec>
+
+	</target>
+
+	<target name="sass" depends="init">
+		<!-- run sass compilation over the various themes -->
+		<for param="sass">
+			<dirset dir="${app.dir}/resources/sass" includes="*"/>
+			<sequential>
+				<local name="app-css-dir"/>
+				<local name="build-css-dir"/>
+				<local name="sass.name"/>
+				<local name="use.shell"/>
+
+				<property name="app-css-dir" location="${app.dir}/resources/css"/>
+				<property name="build-css-dir" location="${app.out}/resources/css"/>
+
+				<!--
+				convert abspath to just the leaf path name
+				-->
+				<basename property="sass.name" file="@{sass}"/>
+
+				<echo>Compile sass ${sass.name}</echo>
+				<!--
+				compile to both the workspace (for theme build)
+				and build directory (for deployment)
+				-->
+				<condition property="use.shell" value="true">
+					<os family="unix"/>
+				</condition>
+
+				<x-shell dir="@{sass}">
+					compass compile --boring --force --css-dir=${app.out}/resources/css/default
+				</x-shell>
+
+				<x-compress-css srcfile="${build-css-dir}/${sass.name}/*.css" verbose="true"
+				                outdir="${build-css-dir}/${sass.name}"/>
+			</sequential>
+		</for>
+
+		<!-- compress css in ${app.dir}/resources/css -->
+		<x-compress-css srcfile="${app.dir}/resources/css/*.css" verbose="true"
+		                outdir="${app.out}/resources/css"/>
+
+		<!-- copy framework / app resource files to build.dir -->
+		<copy todir="${app.out}">
+			<fileset dir="${app.dir}"
+			         includes="resources/images/*"/>
+		</copy>
+
+		<copy toDir="${app.out}/ext">
+			<fileset dir="${app.dir}/ext"
+			         includes="resources/themes/images/**/*,
+                               src/ux/**/css/**/*"/>
+		</copy>
+	</target>
+</project>
