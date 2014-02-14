@@ -1,6 +1,7 @@
 package ru.twelveyes.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by lameroot on 28.12.13.
@@ -8,7 +9,7 @@ import java.util.Date;
 public class MediaContent {
 
     private Integer id;
-    private String path;
+    private Object data;//данные (путь к файлу, текст итп)
     private String contentType;
     private long size;
     private Date uploadAt;
@@ -16,6 +17,7 @@ public class MediaContent {
     private MediaType type;
     private MediaContentType mediaContentType;
     private MediaAlbum mediaAlbum;
+    private Set<Tag> tags;
 
     public enum MediaType {
         PHOTO,
@@ -39,12 +41,12 @@ public class MediaContent {
         this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public Object getData() {
+        return data;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public String getContentType() {
@@ -101,5 +103,13 @@ public class MediaContent {
 
     public void setMediaAlbum(MediaAlbum mediaAlbum) {
         this.mediaAlbum = mediaAlbum;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 }

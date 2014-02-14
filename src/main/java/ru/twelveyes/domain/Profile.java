@@ -1,12 +1,13 @@
 package ru.twelveyes.domain;
 
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedToVia;
+import org.neo4j.graphdb.Direction;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.neo4j.annotation.*;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,10 +17,15 @@ import java.util.Set;
 @NodeEntity
 public class Profile {
 
-    private Integer id;
+    @GraphId
+    private Long id;
     private Sex sex;
     private Date birthday;
+    @Indexed(indexName = "emails", unique = true, fieldName = "email")
     private String email;
+    //@Transient
+    @Indexed()
+    //@GraphProperty
     private String password;
     private Contact contact;
     private List<Desert> deserts;
@@ -28,6 +34,10 @@ public class Profile {
     private Set<Rating> ratings;
     @RelatedToVia(type = "COMMENTED")
     private Set<Comment> comments;
+    @RelatedTo(direction = Direction.OUTGOING)
+    private Journal journal;
+    @RelatedTo(direction = Direction.BOTH,type = "FOLLOWED")
+    private Set<Profile> followers;
 
     public enum Sex {
         MALE,
@@ -66,11 +76,11 @@ public class Profile {
         this.password = password;
     }
 
-    public Serializable getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -90,11 +100,69 @@ public class Profile {
         this.deserts = deserts;
     }
 
+    public Journal getJournal() {
+        return journal;
+    }
+
+    public void setJournal(Journal journal) {
+        this.journal = journal;
+    }
+
     public Rating rate(Neo4jTemplate template, Company company, Integer stars, String comment) {
         Rating rating = template.createRelationshipBetween(this,company,Rating.class,"RATED",false);
         rating.rate(stars,comment);
         return template.save(rating);
     }
 
+    public Set<Profile> getFollowers() {
+        return followers;
+    }
 
+    public void setFollowers(Set<Profile> followers) {
+        this.followers = followers;
+    }
+
+    public Profile addFollower(Profile profile) {
+        if ( null == followers ) followers = new HashSet<>();
+        followers.add(profile);
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Profile profile = (Profile) o;
+
+        if (birthday != null ? !birthday.equals(profile.birthday) : profile.birthday != null) return false;
+        if (email != null ? !email.equals(profile.email) : profile.email != null) return false;
+        if (id != null ? !id.equals(profile.id) : profile.id != null) return false;
+        if (password != null ? !password.equals(profile.password) : profile.password != null) return false;
+        if (sex != profile.sex) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Profile");
+        sb.append("{id=").append(id);
+        sb.append(", sex=").append(sex);
+        sb.append(", birthday=").append(birthday);
+        sb.append(", email='").append(email).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

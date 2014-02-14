@@ -36,7 +36,7 @@ public class AbstractDomainTest extends Neo4jConfigTest {
         MediaContent content = new MediaContent();
         content.setContentType("image");
         content.setModerated(false);
-        content.setPath("/var/images/1.jpg");
+        content.setData("/var/images/1.jpg");
         content.setSize(1111);
         content.setType(MediaContent.MediaType.PHOTO);
         content.setUploadAt(new Date());

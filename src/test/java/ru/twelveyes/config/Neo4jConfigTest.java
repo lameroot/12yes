@@ -21,6 +21,7 @@ public class Neo4jConfigTest extends AbstractConfigTest {
     @Resource
     protected ApplicationContext applicationContext;
 
+
     @Test
     public void testExist() {
         assertNotNull(applicationContext);
