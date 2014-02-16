@@ -37,7 +37,9 @@ public class Profile {
     private Journal journal;
     @RelatedTo(direction = Direction.BOTH,type = "FOLLOWED")
     private Set<Profile> followers;
-    //тип аользователя (это может быть просто прользователь, а может быть админ компании)
+    @RelatedTo(direction = Direction.BOTH, type = "BLACK_LIST")
+    private Set<Profile> blackList = new HashSet<>();
+    //todo: тип аользователя (это может быть просто прользователь, а может быть админ компании)
 
     public Profile(){}
     public Profile(String login){
@@ -139,6 +141,14 @@ public class Profile {
         if ( null == followers ) followers = new HashSet<>();
         followers.add(profile);
         return this;
+    }
+
+    public Set<Profile> getBlackList() {
+        return blackList;
+    }
+
+    public void setBlackList(Set<Profile> blackList) {
+        this.blackList = blackList;
     }
 
     @Override
