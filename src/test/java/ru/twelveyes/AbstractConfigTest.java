@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import ru.twelveyes.repository.ProfileRepository;
+import ru.twelveyes.repository.TweetRepository;
 
 import javax.annotation.Resource;
 
@@ -18,6 +20,5 @@ import javax.annotation.Resource;
 public class AbstractConfigTest extends TestCase{
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Resource
-    protected Neo4jTemplate template;
+
 }

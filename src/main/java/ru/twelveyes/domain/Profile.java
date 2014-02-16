@@ -21,11 +21,10 @@ public class Profile {
     private Long id;
     private Sex sex;
     private Date birthday;
-    @Indexed(indexName = "emails", unique = true, fieldName = "email")
     private String email;
-    //@Transient
-    @Indexed()
-    //@GraphProperty
+    @Indexed(indexName = "logins", unique = true, fieldName = "login")
+    private String login;
+    @Transient
     private String password;
     private Contact contact;
     private List<Desert> deserts;
@@ -38,6 +37,11 @@ public class Profile {
     private Journal journal;
     @RelatedTo(direction = Direction.BOTH,type = "FOLLOWED")
     private Set<Profile> followers;
+
+    public Profile(){}
+    public Profile(String login){
+        this.login = login;
+    }
 
     public enum Sex {
         MALE,
@@ -106,6 +110,14 @@ public class Profile {
 
     public void setJournal(Journal journal) {
         this.journal = journal;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public Rating rate(Neo4jTemplate template, Company company, Integer stars, String comment) {

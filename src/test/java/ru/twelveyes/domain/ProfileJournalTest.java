@@ -19,35 +19,9 @@ import static org.neo4j.cypherdsl.querydsl.CypherQueryDSL.*;
  */
 public class ProfileJournalTest extends Neo4jConfigTest {
 
-    @Resource
-    protected ProfileRepository profileRepository;
-
     @Test
     public void testExists() {
         assertNotNull(profileRepository);
-    }
-
-    private Contact createContact() {
-        Contact contact = new Contact();
-        contact.setFirstName("stas");
-        contact.setSecondName("krainov");
-        contact.setAddress("Russia, Moscow");
-        contact.setEmails("asd@mail.ru,qwe@mail.ru");
-        contact.setLatitude(11.0);
-        contact.setLongitude(15.0);
-        contact.setPhones("123123123,789789789");
-        return contact;
-    }
-
-    protected Profile createProfile(String email, String password) {
-        Profile profile = new Profile();
-        profile.setEmail(email);
-        profile.setPassword(password);
-        profile.setBirthday(new Date());
-        profile.setSex(Profile.Sex.MALE);
-        profile.setContact(createContact());
-
-        return profile;
     }
 
     @Test
