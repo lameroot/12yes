@@ -25,6 +25,9 @@ public class Activity {
     private Set<Activity> child;
     @RelatedTo(type = "COMPANY", direction = Direction.BOTH)
     private Set<Company> companies;
+    @RelatedTo(type = "ACTIVITY_FOLLOWED", direction = Direction.INCOMING)
+    private Set<Profile> followers = new HashSet<>();//компании могут вести некий блог, как в рамках своей компании, так и
+    //на уровне активити, тем самым люди которые подписаны на данные активити могу видеть, что появилось что-то новое
 
     public Long getId() {
         return id;
@@ -64,6 +67,14 @@ public class Activity {
 
     public void setCompanies(Set<Company> companies) {
         this.companies = companies;
+    }
+
+    public Set<Profile> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<Profile> followers) {
+        this.followers = followers;
     }
 
     public Activity addParent(Activity activity) {

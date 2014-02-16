@@ -37,6 +37,7 @@ public class Profile {
     private Journal journal;
     @RelatedTo(direction = Direction.BOTH,type = "FOLLOWED")
     private Set<Profile> followers;
+    //тип аользователя (это может быть просто прользователь, а может быть админ компании)
 
     public Profile(){}
     public Profile(String login){
