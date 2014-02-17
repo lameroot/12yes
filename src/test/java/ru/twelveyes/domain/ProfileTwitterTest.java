@@ -1,8 +1,10 @@
 package ru.twelveyes.domain;
 
 import org.junit.Test;
+import org.springframework.test.annotation.Rollback;
 import ru.twelveyes.config.Neo4jConfigTest;
 
+import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -11,6 +13,48 @@ import java.util.Set;
 public class ProfileTwitterTest extends Neo4jConfigTest {
 
     @Test
+    @Rollback(false)
+    public void testTwitter() {
+        Profile profile1 = createProfile("lameroot@mail.ru","profile1");
+        profileRepository.save(profile1);
+        assertNotNull(profile1.getId());
+
+        Profile profile2 = createProfile("lameroot2@mail.ru","profile2");
+        profileRepository.save(profile2);
+        assertNotNull(profile2.getId());
+
+        Activity activity0 = createActivity("sport",null);
+        activityRepository.save(activity0);
+        assertNotNull(activity0.getId());
+        Activity activity1 = createActivity("tennis",activity0);
+        activityRepository.save(activity1);
+        assertNotNull(activity1.getId());
+
+        Company company1 = createCompany("school one", activity1);
+        companyRepository.save(company1);
+        assertNotNull(company1.getId());
+
+        Tag tag1 = createTag("#tag1");
+        Tag tag2 = createTag("tag2");
+        tagRepository.save(Arrays.asList(tag1,tag2));
+        assertNotNull(tag1.getId());
+        assertNotNull(tag2.getId());
+
+        Event event1 = createEvent("@@event1",company1);
+        eventRepository.save(event1);
+        assertNotNull(event1.getId());
+
+        Tweet tweet = new Tweet(1L,profile1,"Profile @lameroot told us about");
+        tweet.addProfileMention(profile2);
+        tweet.addActivityMention(activity0).addActivityMention(activity1).addActivityMention(company1);
+        tweet.addTag(tag1).addTag(tag2);
+        tweet.addEventMention(event1);
+        tweetRepository.save(tweet);
+        assertNotNull(tweet.getId());
+    }
+
+
+    //@Test
     public void testCreateTweet() {
         Profile profile1 = createProfile("lameroot@mail.ru","profile1");
         profileRepository.save(profile1);

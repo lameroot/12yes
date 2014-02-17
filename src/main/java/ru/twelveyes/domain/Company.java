@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Created by lameroot on 22.01.14.
  */
-@NodeEntity(partial = true)
+@NodeEntity
 public class Company extends Activity {
 
     private Contact contact;
@@ -47,7 +47,8 @@ public class Company extends Activity {
     }
 
     private void belong(Activity activity, int deep) {
-        activities.add(activity);
+        //activities.add(activity);
+        addParent(activity);
         if ( null != activity.getParents() ) {
             for (Activity parent : activity.getParents()) {
                 belong(parent, ++deep);

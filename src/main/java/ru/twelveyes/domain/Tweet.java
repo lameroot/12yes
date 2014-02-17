@@ -20,20 +20,23 @@ public class Tweet {
     @Fetch
     @RelatedTo(type = "POSTED", direction = Direction.INCOMING)
     private Profile sender;
-    @Fetch
+//    @Fetch
     @RelatedTo(type = "TAG")
     private Set<Tag> tags = new HashSet<>();
-    @Fetch
+//    @Fetch
     @RelatedTo(type = "ACTIVITY_MENTION")
     private Set<Activity> activityMentions = new HashSet<>();
-    @Fetch
-    @RelatedTo(type = "PROFILE_MENTIONS")
+//    @Fetch
+    @RelatedTo(type = "PROFILE_MENTION")
     private Set<Profile> profileMentions = new HashSet<>();
+    @RelatedTo(type = "EVENT_MENTION")
+    private Set<Event> eventMentions = new HashSet<>();
     @Fetch
     @RelatedTo(type = "SOURCE_TWEET")
     private Tweet source;
     @RelatedTo(type = "WATCHERS")
     private Set<Profile> watchers = new HashSet<>();
+
     private boolean isPrivate;
 
     public Tweet() {
@@ -54,6 +57,12 @@ public class Tweet {
         this.profileMentions.add(profile);
         return this;
     }
+
+    public Tweet addEventMention(Event event) {
+        this.eventMentions.add(event);
+        return this;
+    }
+
     public Tweet addTag(Tag tag) {
         tags.add(tag);
         return this;

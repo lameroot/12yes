@@ -28,11 +28,6 @@ public class Profile {
     private String password;
     private Contact contact;
     private List<Desert> deserts;
-    @RelatedToVia(type = "RATED")
-    @Fetch
-    private Set<Rating> ratings;
-    @RelatedToVia(type = "COMMENTED")
-    private Set<Comment> comments;
     @RelatedTo(direction = Direction.OUTGOING)
     private Journal journal;
     @RelatedTo(direction = Direction.BOTH,type = "FOLLOWED")
@@ -40,6 +35,11 @@ public class Profile {
     @RelatedTo(direction = Direction.BOTH, type = "BLACK_LIST")
     private Set<Profile> blackList = new HashSet<>();
     //todo: тип аользователя (это может быть просто прользователь, а может быть админ компании)
+    @RelatedToVia(type = "RATED")
+    @Fetch
+    private Set<Rating> ratings;
+    @RelatedToVia(type = "COMMENTED")
+    private Set<Comment> comments;
 
     public Profile(){}
     public Profile(String login){

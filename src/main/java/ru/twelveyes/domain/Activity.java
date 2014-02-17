@@ -78,6 +78,7 @@ public class Activity {
     }
 
     public Activity addParent(Activity activity) {
+        if ( null == activity ) return this;
         if ( null == parents ) parents = new HashSet<Activity>();
         parents.add(activity);
         return this;

@@ -6,13 +6,12 @@ import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import ru.twelveyes.AbstractConfigTest;
-import ru.twelveyes.domain.Contact;
-import ru.twelveyes.domain.Profile;
-import ru.twelveyes.repository.ProfileRepository;
-import ru.twelveyes.repository.TweetRepository;
+import ru.twelveyes.domain.*;
+import ru.twelveyes.repository.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * User: Krainov
@@ -32,13 +31,49 @@ public class Neo4jConfigTest extends AbstractConfigTest {
     protected ProfileRepository profileRepository;
     @Resource
     protected TweetRepository tweetRepository;
+    @Resource
+    protected ActivityRepository activityRepository;
+    @Resource
+    protected CompanyRepository companyRepository;
+    @Resource
+    protected TagRepository tagRepository;
+    @Resource
+    protected EventRepository eventRepository;
 
     @Test
     public void testExist() {
         assertNotNull(applicationContext);
     }
 
-    private Contact createContact() {
+    protected Event createEvent(String title, Activity activity) {
+        Event event = new Event();
+        event.setTitle(title);
+        event.belongTo(activity);
+        return event;
+    }
+
+
+    protected Tag createTag(String tagValue) {
+        Tag tag = new Tag(tagValue);
+        return tag;
+    }
+
+    protected Company createCompany(String title, Activity activity) {
+        Company company = new Company();
+        company.setTitle(title);
+        company.belongTo(activity);
+        return company;
+    }
+
+    protected Activity createActivity(String title, Activity parent) {
+        Activity activity = new Activity();
+        activity.setTitle(title);
+        activity.addParent(parent);
+
+        return activity;
+    }
+
+    protected Contact createContact() {
         Contact contact = new Contact();
         contact.setFirstName("stas");
         contact.setSecondName("krainov");
