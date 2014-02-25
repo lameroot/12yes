@@ -5,5 +5,5 @@ package ru.twelveyes.git;
  */
 public class Rebase2Class {
 
-    private int test;
+    private String test;
 }
