@@ -1,0 +1,9 @@
+package ru.twelveyes.git;
+
+/**
+ * Created by lameroot on 25.02.14.
+ */
+public class Rebase2Class {
+
+    private int test;
+}
