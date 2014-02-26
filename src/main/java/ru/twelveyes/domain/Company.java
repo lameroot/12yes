@@ -3,7 +3,10 @@ package ru.twelveyes.domain;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
+
+import java.util.Set;
 
 /**
  * Created by lameroot on 22.01.14.
@@ -14,6 +17,8 @@ public class Company extends Activity {
     private Contact contact;
     @Fetch @RelatedToVia(type = "RATED", direction = Direction.INCOMING)
     private Iterable<Rating> ratings;
+    @RelatedToVia(direction = Direction.OUTGOING, type = "SERVICE")
+    private Set<ServiceDetails> services;
 
     public Contact getContact() {
         return contact;
