@@ -3,11 +3,7 @@ package ru.twelveyes.domain;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by lameroot on 22.01.14.
@@ -16,19 +12,8 @@ import java.util.Set;
 public class Company extends Activity {
 
     private Contact contact;
-    @Fetch
-    @RelatedTo(type = "COMPANY", direction = Direction.BOTH)
-    private Set<Activity> activities = new HashSet<Activity>();
     @Fetch @RelatedToVia(type = "RATED", direction = Direction.INCOMING)
     private Iterable<Rating> ratings;
-
-    public Set<Activity> getActivities() {
-        return activities;
-    }
-
-    public void setActivities(Set<Activity> activities) {
-        this.activities = activities;
-    }
 
     public Contact getContact() {
         return contact;
@@ -47,7 +32,6 @@ public class Company extends Activity {
     }
 
     private void belong(Activity activity, int deep) {
-        //activities.add(activity);
         addParent(activity);
         if ( null != activity.getParents() ) {
             for (Activity parent : activity.getParents()) {
@@ -68,9 +52,8 @@ public class Company extends Activity {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Company{");
-//        sb.append("id=").append(id);
-//        sb.append(", title='").append(title).append('\'');
-        sb.append(", activities size =").append(null != activities ? activities.size() : null);
+        sb.append("id=").append(getId());
+        sb.append(", title='").append(getTitle()).append('\'');
         sb.append('}');
         return sb.toString();
     }

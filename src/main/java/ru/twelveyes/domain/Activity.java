@@ -1,10 +1,7 @@
 package ru.twelveyes.domain;
 
 import org.neo4j.graphdb.Direction;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.GraphProperty;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.data.neo4j.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,13 +15,12 @@ public class Activity {
     @GraphId
     private Long id;
     @GraphProperty
+    @Indexed
     private String title;
     @RelatedTo(type = "ACTIVITY", direction = Direction.INCOMING)
     private Set<Activity> parents;
     @RelatedTo(type = "ACTIVITY", direction = Direction.OUTGOING)
     private Set<Activity> child;
-    @RelatedTo(type = "COMPANY", direction = Direction.BOTH)
-    private Set<Company> companies;
     @RelatedTo(type = "ACTIVITY_FOLLOWED", direction = Direction.INCOMING)
     private Set<Profile> followers = new HashSet<>();//компании могут вести некий блог, как в рамках своей компании, так и
     //на уровне активити, тем самым люди которые подписаны на данные активити могу видеть, что появилось что-то новое
@@ -61,14 +57,6 @@ public class Activity {
         this.child = child;
     }
 
-    public Set<Company> getCompanies() {
-        return companies;
-    }
-
-    public void setCompanies(Set<Company> companies) {
-        this.companies = companies;
-    }
-
     public Set<Profile> getFollowers() {
         return followers;
     }
@@ -91,7 +79,6 @@ public class Activity {
         sb.append(", title='").append(title).append('\'');
         sb.append(", parents size=").append(null != parents ?  parents.size() : null);
         sb.append(", child size =").append(null != child ?  child.size() : null);
-        sb.append(", companies size =").append(null != companies ? companies.size() : null);
         sb.append('}');
         return sb.toString();
     }

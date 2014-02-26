@@ -8,6 +8,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import ru.twelveyes.AbstractConfigTest;
 import ru.twelveyes.domain.*;
 import ru.twelveyes.repository.*;
+import ru.twelveyes.service.ProfileService;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -39,6 +40,8 @@ public class Neo4jConfigTest extends AbstractConfigTest {
     protected TagRepository tagRepository;
     @Resource
     protected EventRepository eventRepository;
+    @Resource
+    protected ProfileService profileService;
 
     @Test
     public void testExist() {

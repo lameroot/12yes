@@ -9,4 +9,6 @@ import ru.twelveyes.domain.Activity;
  * Time: 17:56
  */
 public interface ActivityRepository extends GraphRepository<Activity> {
+
+
 }
