@@ -21,8 +21,9 @@ public class Profile {
     private Long id;
     private Sex sex;
     private Date birthday;
+    @Indexed(unique = true, indexName = "emails")
     private String email;
-    @Indexed(indexName = "logins", unique = true, fieldName = "login")
+    @Indexed(indexName = "logins", unique = false, fieldName = "login")
     private String login;
     @Transient
     private String password;
@@ -30,8 +31,9 @@ public class Profile {
     private List<Desert> deserts;
     @RelatedTo(direction = Direction.OUTGOING)
     private Journal journal;
-    @RelatedTo(direction = Direction.BOTH,type = "FOLLOWED")
-    private Set<Profile> followers;
+    @Fetch
+    @RelatedTo(direction = Direction.OUTGOING,type = "FOLLOWED")
+    private Set<Profile> followers = new HashSet<>();
     @RelatedTo(direction = Direction.BOTH, type = "BLACK_LIST")
     private Set<Profile> blackList = new HashSet<>();
     //todo: тип аользователя (это может быть просто прользователь, а может быть админ компании)
@@ -137,8 +139,13 @@ public class Profile {
         this.followers = followers;
     }
 
+    public Profile follow(Profile profile) {
+        if ( null == profile ) return this;
+        profile.addFollower(this);
+        return this;
+    }
+
     public Profile addFollower(Profile profile) {
-        if ( null == followers ) followers = new HashSet<>();
         followers.add(profile);
         return this;
     }

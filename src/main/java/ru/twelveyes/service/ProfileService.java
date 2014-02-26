@@ -1,11 +1,30 @@
 package ru.twelveyes.service;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.twelveyes.domain.Profile;
+import ru.twelveyes.repository.ProfileRepository;
+
+import javax.annotation.Resource;
 
 /**
  * Created by lameroot on 28.12.13.
  */
-public interface ProfileService {
+@Service
+public class ProfileService {
 
-    public Profile create();
+    @Resource
+    private ProfileRepository profileRepository;
+
+    public Profile create() {
+        return null;
+    }
+
+    public Profile follow(Profile me, Profile target) {
+        if ( null == me ) return null;
+        if ( null == target ) return me;
+        me.follow(target);
+        profileRepository.save(target);
+        return me;
+    }
 }
