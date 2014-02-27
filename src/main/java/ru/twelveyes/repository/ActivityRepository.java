@@ -8,7 +8,10 @@ import ru.twelveyes.domain.Activity;
  * Date: 17.02.14
  * Time: 17:56
  */
-public interface ActivityRepository extends GraphRepository<Activity> {
+public interface ActivityRepository<A extends Activity> extends GraphRepository<A> {
 
+    public A findByIndex(String index);
+    public A findByTitleLike(String title);
+    public Iterable<A> findAllChildActivities(A parent);
 
 }

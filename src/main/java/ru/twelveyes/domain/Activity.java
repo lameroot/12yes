@@ -12,11 +12,16 @@ import java.util.Set;
 @NodeEntity
 public class Activity {
 
+    public static final String INDEX_PARAM = "index";
+
     @GraphId
     private Long id;
     @GraphProperty
     @Indexed
     private String title;
+    @GraphProperty
+    @Indexed(unique = true)
+    private String index; //индекс который формируется при создании, далее является опозновательным знаком для компаний как например %company
     @RelatedTo(type = "ACTIVITY", direction = Direction.INCOMING)
     private Set<Activity> parents;
     @RelatedTo(type = "ACTIVITY", direction = Direction.OUTGOING)
@@ -70,6 +75,14 @@ public class Activity {
         if ( null == parents ) parents = new HashSet<Activity>();
         parents.add(activity);
         return this;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 
     @Override

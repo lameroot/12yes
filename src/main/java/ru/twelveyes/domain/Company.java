@@ -12,13 +12,19 @@ import java.util.Set;
  * Created by lameroot on 22.01.14.
  */
 @NodeEntity
-public class Company extends Activity {
+public class Company extends Activity implements Contactable{
 
+    @RelatedTo(type = "CONTACT",direction = Direction.OUTGOING)
     private Contact contact;
     @Fetch @RelatedToVia(type = "RATED", direction = Direction.INCOMING)
     private Iterable<Rating> ratings;
     @RelatedToVia(direction = Direction.OUTGOING, type = "SERVICE")
     private Set<ServiceDetails> services;
+
+    @Override
+    public Long getOwnerId() {
+        return getId();
+    }
 
     public Contact getContact() {
         return contact;

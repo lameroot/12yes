@@ -1,26 +1,16 @@
 package ru.twelveyes.domain;
 
+import org.springframework.data.neo4j.annotation.EndNode;
 import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedToVia;
-import org.springframework.data.neo4j.fieldaccess.DynamicProperties;
-import org.springframework.data.neo4j.fieldaccess.DynamicPropertiesContainer;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import org.springframework.data.neo4j.annotation.RelationshipEntity;
+import org.springframework.data.neo4j.annotation.StartNode;
 
 /**
- * Created by lameroot on 28.12.13.
+ * User: Krainov
+ * Date: 27.02.14
+ * Time: 18:08
  */
-@NodeEntity
-public class Contact {
-
-    @GraphId
-    private Integer id;
-
-
-    private DynamicProperties dynamicProperties = new DynamicPropertiesContainer();
+public class ContactParam {
 
     public final static String FIRST_NAME_PARAM = "";
     public final static String SECOND_NAME_PARAM = "";
@@ -38,19 +28,7 @@ public class Contact {
     private final boolean isPrivate;
     private final Type paramType;
 
-    private Set<ContactParam> params = new HashSet<>();
-
-    protected Contact addParam(ContactParam param) {
-        params.add(param);
-        return this;
-    }
-    public Contact addFirstName(String value) {
-        dynamicProperties.setProperty(Contact.FIRST_NAME_PARAM,new ContactParam(ContactParam.FIRST_NAME_PARAM, value, false, ContactParam.Type.PROFILE));
-        return this;
-    }
-
-
-    public Contact(String name, Object value, boolean isPrivate, Type paramType) {
+    public ContactParam(String name, Object value, boolean isPrivate, Type paramType) {
         this.name = name;
         this.value = value;
         this.isPrivate = isPrivate;
@@ -84,7 +62,7 @@ public class Contact {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Contact that = (Contact) o;
+        ContactParam that = (ContactParam) o;
 
         if (!name.equals(that.name)) return false;
         if (paramType != that.paramType) return false;
@@ -98,20 +76,4 @@ public class Contact {
         result = 31 * result + paramType.hashCode();
         return result;
     }
-
-
-
-    /*
-    private String firstName;
-    private String secondName;
-    private MediaContent avatar;
-    private List<MediaContent> contents;
-
-    private String emails;
-    private String phones;
-    private String address;
-    private double latitude;
-    private double longitude;
-     */
-
 }
