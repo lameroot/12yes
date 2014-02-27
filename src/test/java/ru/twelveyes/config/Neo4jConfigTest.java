@@ -78,13 +78,13 @@ public class Neo4jConfigTest extends AbstractConfigTest {
 
     protected Contact createContact() {
         Contact contact = new Contact();
-        contact.setFirstName("stas");
-        contact.setSecondName("krainov");
-        contact.setAddress("Russia, Moscow");
-        contact.setEmails("asd@mail.ru,qwe@mail.ru");
-        contact.setLatitude(11.0);
-        contact.setLongitude(15.0);
-        contact.setPhones("123123123,789789789");
+//        contact.setFirstName("stas");
+//        contact.setSecondName("krainov");
+//        contact.setAddress("Russia, Moscow");
+//        contact.setEmails("asd@mail.ru,qwe@mail.ru");
+//        contact.setLatitude(11.0);
+//        contact.setLongitude(15.0);
+//        contact.setPhones("123123123,789789789");
         return contact;
     }
 

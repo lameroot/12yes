@@ -6,6 +6,7 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.fieldaccess.DynamicProperties;
 import org.springframework.data.neo4j.fieldaccess.DynamicPropertiesContainer;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,12 +18,16 @@ import java.util.Set;
 public class Contact {
 
     @GraphId
-    private Integer id;
+    private Long id;
+    private DynamicProperties params = new DynamicPropertiesContainer();
 
+    public enum Type {
+        GEO,
+        PROFILE,
+        ADDRESS
+    }
 
-    private DynamicProperties dynamicProperties = new DynamicPropertiesContainer();
-
-    public final static String FIRST_NAME_PARAM = "";
+    public final static String FIRST_NAME_PARAM = "first_name";
     public final static String SECOND_NAME_PARAM = "";
     public final static String DATE_BIRTHDAY_PARAM = "";
     public final static String EMAIL_PARAM = "";
@@ -33,36 +38,59 @@ public class Contact {
     public final static String CITY_PARAM = "";
     public final static String UNDERGROUND_PARAM = "";
 
-    private final String name;
-    private final Object value;
-    private final boolean isPrivate;
-    private final Type paramType;
+//    private final String name;
+//    private final Object value;
+//    private final boolean isPrivate;
+//    private final Type paramType;
 
-    private Set<ContactParam> params = new HashSet<>();
+//    private Set<ContactParam> params = new HashSet<>();
+//
+//    protected Contact addParam(ContactParam param) {
+//        params.add(param);
+//        return this;
+//    }
 
-    protected Contact addParam(ContactParam param) {
-        params.add(param);
-        return this;
+    public class Name implements Serializable{
+        String name;
+        Integer age;
+
+        public Name(String name, Integer age) {
+            this.name = name;
+            this.age = age;
+        }
     }
+
     public Contact addFirstName(String value) {
-        dynamicProperties.setProperty(Contact.FIRST_NAME_PARAM,new ContactParam(ContactParam.FIRST_NAME_PARAM, value, false, ContactParam.Type.PROFILE));
+        //params.setProperty(Contact.FIRST_NAME_PARAM,new ContactParam(ContactParam.FIRST_NAME_PARAM, value, false, ContactParam.Type.PROFILE));
+        params.setProperty(Contact.FIRST_NAME_PARAM,value);
         return this;
     }
 
 
-    public Contact(String name, Object value, boolean isPrivate, Type paramType) {
-        this.name = name;
-        this.value = value;
-        this.isPrivate = isPrivate;
-        this.paramType = paramType;
+//    public Contact(String name, Object value, boolean isPrivate, Type paramType) {
+//        this.name = name;
+//        this.value = value;
+//        this.isPrivate = isPrivate;
+//        this.paramType = paramType;
+//    }
+
+    public Long getId() {
+        return id;
     }
 
-    public enum Type {
-        GEO,
-        PROFILE,
-        ADDRESS
+    public void setId(Long id) {
+        this.id = id;
     }
 
+    public DynamicProperties getParams() {
+        return params;
+    }
+
+    public void setParams(DynamicProperties params) {
+        this.params = params;
+    }
+
+    /*
     public String getName() {
         return name;
     }
@@ -98,6 +126,7 @@ public class Contact {
         result = 31 * result + paramType.hashCode();
         return result;
     }
+    */
 
 
 

@@ -12,5 +12,5 @@ import ru.twelveyes.domain.Company;
  */
 public interface CompanyRepository extends GraphRepository<Company>, RelationshipOperationsRepository<Company>, ActivityRepository<Company> {
 
-    public Iterable<Company> findAllChildCompany(Activity parent);//поиск по атрибутам (просто поиск делать не надо)
+    //public Iterable<Company> findAllChildCompany(Activity parent);//поиск по атрибутам (просто поиск делать не надо)
 }

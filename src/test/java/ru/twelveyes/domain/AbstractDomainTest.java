@@ -21,13 +21,13 @@ public class AbstractDomainTest extends Neo4jConfigTest {
 
     protected Contact createContact() {
         Contact contact = new Contact();
-        contact.setFirstName("stas");
-        contact.setSecondName("krainov");
-        contact.setAddress("address");
-        contact.setEmails("asd@asd.ru");
-        contact.setPhones("123123");
-        contact.setLatitude(111.2);
-        contact.setLongitude(333.2);
+//        contact.setFirstName("stas");
+//        contact.setSecondName("krainov");
+//        contact.setAddress("address");
+//        contact.setEmails("asd@asd.ru");
+//        contact.setPhones("123123");
+//        contact.setLatitude(111.2);
+//        contact.setLongitude(333.2);
 
         return contact;
     }
