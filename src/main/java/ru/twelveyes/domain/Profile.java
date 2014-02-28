@@ -21,9 +21,9 @@ public class Profile {
     private Long id;
     private Sex sex;
     private Date birthday;
-    @Indexed(unique = true, indexName = "emails")
+    @Indexed(unique = true)
     private String email;
-    @Indexed(indexName = "logins", unique = false, fieldName = "login")
+    @Indexed(unique = false)
     private String login;
     @Transient
     private String password;
@@ -42,6 +42,14 @@ public class Profile {
     private Set<Rating> ratings;
     @RelatedToVia(type = "COMMENTED")
     private Set<Comment> comments;
+
+    private String privateContactParametersAsString;
+    private String allContactParametersAsString;
+
+    @Transient
+    private Set<String> privateContactParameters = new HashSet<>();
+    @Transient
+    private Set<String> allContactParameters = new HashSet<>();
 
     public Profile(){}
     public Profile(String login){

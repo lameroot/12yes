@@ -12,23 +12,27 @@ import org.springframework.data.neo4j.annotation.StartNode;
  */
 public class ContactParam {
 
-    public final static String FIRST_NAME_PARAM = "";
-    public final static String SECOND_NAME_PARAM = "";
-    public final static String DATE_BIRTHDAY_PARAM = "";
-    public final static String EMAIL_PARAM = "";
-    public final static String PHONE_PARAM = "";
-    public final static String LATITUDE_PARAM = "";
-    public final static String LONGITUDE_PARAM = "";
-    public final static String ADDRESS_PARAM = "";
-    public final static String CITY_PARAM = "";
-    public final static String UNDERGROUND_PARAM = "";
+    public final static String FIRST_NAME_PARAM = "first_name";
+    public final static String SECOND_NAME_PARAM = "second_param";
+    public final static String DATE_BIRTHDAY_PARAM = "date_birthday";
+    public final static String EMAIL_PARAM = "email";
+    public final static String PHONE_PARAM = "phone";
+    public final static String ADDRESS_PARAM = "address";
+    public final static String CITY_PARAM = "city";
+    public final static String UNDERGROUND_PARAM = "underground";
 
-    private final String name;
-    private final Object value;
-    private final boolean isPrivate;
-    private final Type paramType;
+    private String name;
+    private Object value;
+    private boolean isPrivate;
+    private Type paramType;
 
-    public ContactParam(String name, Object value, boolean isPrivate, Type paramType) {
+    private ContactParam(){}
+    public ContactParam(String name, Object value, Type paramType) {
+        this.name = name;
+        this.value = value;
+        this.paramType = paramType;
+    }
+    public ContactParam(String name, Object value, Type paramType, boolean isPrivate) {
         this.name = name;
         this.value = value;
         this.isPrivate = isPrivate;
@@ -57,6 +61,22 @@ public class ContactParam {
         return paramType;
     }
 
+    private void setName(String name) {
+        this.name = name;
+    }
+
+    private void setValue(Object value) {
+        this.value = value;
+    }
+
+    protected void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    private void setParamType(Type paramType) {
+        this.paramType = paramType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,5 +95,17 @@ public class ContactParam {
         int result = name.hashCode();
         result = 31 * result + paramType.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("ContactParam");
+        sb.append("{name='").append(name).append('\'');
+        sb.append(", value=").append(value);
+        sb.append(", isPrivate=").append(isPrivate);
+        sb.append(", paramType=").append(paramType);
+        sb.append('}');
+        return sb.toString();
     }
 }

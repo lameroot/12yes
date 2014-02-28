@@ -13,7 +13,7 @@
         <js.debug>true</js.debug>
         <js.compiler>yui</js.compiler>
         <spring.version>4.0.0.RELEASE</spring.version>
-        <spring-data-neo4j.version>2.3.3.RELEASE</spring-data-neo4j.version>
+        <spring-data-neo4j.version>3.0.0.RELEASE</spring-data-neo4j.version>
         <spring-data.version>1.4.2.RELEASE</spring-data.version>
         <hibernate.version>4.2.8.Final</hibernate.version>
         <mysql.version>5.1.27</mysql.version>
@@ -82,12 +82,12 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j-aspects</artifactId>
-            <version>2.3.3.RELEASE</version>
+            <version>${spring-data-neo4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j-rest</artifactId>
-            <version>2.3.3.RELEASE</version>
+            <version>${spring-data-neo4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -118,6 +118,19 @@
             <classifier>static-web</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-spatial</artifactId>
+            <!--<version>0.10</version>-->
+            <version>0.12-neo4j-2.0.2-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2.5</version>
+        </dependency>
 
         <!-- servlets -->
         <dependency>
@@ -404,6 +417,10 @@
             <id>spring-maven-milestone</id>
             <name>Springframework Maven Repository</name>
             <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        <repository>
+            <id>neo4j-content</id>
+            <url>http://m2.neo4j.org/content/repositories/releases/</url>
         </repository>
     </repositories>
 
