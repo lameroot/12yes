@@ -26,19 +26,18 @@ public class CompanyServiceTest extends Neo4jConfigTest{
     private void prepareActivities() {
         sport = createActivity("sport",null);
         sport = activityService.create(sport,sport.getTitle(),sport.getUniqueIndex(),null,null);
-//        activityRepository.save(sport);
         assertNotNull(sport.getId());
+        System.out.println("sport = " + sport.getUniqueIndex());
 
         culture = createActivity("culture",null);
         culture = activityService.create(culture,culture.getTitle(),culture.getUniqueIndex(),null,null);
-//        activityRepository.save(culture);
         assertNotNull(culture.getId());
+        System.out.println("culture = " + culture.getUniqueIndex());
 
         dance = createActivity("dance",sport);
         dance = activityService.create(dance,dance.getTitle(),dance.getUniqueIndex(),dance.getParents().toArray(new Activity[]{}));
-        //activityRepository.save(dance);
         assertNotNull(dance);
-
+        System.out.println("dance = " + dance.getUniqueIndex());
     }
 
     @Test
@@ -163,5 +162,18 @@ public class CompanyServiceTest extends Neo4jConfigTest{
         for (ServiceDetail serviceDetail : company2.getServices()) {
             System.out.println(serviceDetail.getCompany() + ":" + serviceDetail.getService());
         }
+    }
+
+    @Test
+    public void testCreateNotUniqueIndex() throws Exception {
+        Activity sport = createActivity("sport",null);
+        sport = activityService.create(sport,sport.getTitle(),sport.getUniqueIndex(),null,null);
+        assertNotNull(sport.getId());
+
+        Activity sport2 = createActivity("sport",null);
+        sport2 = activityService.create(sport2,sport2.getTitle(),sport2.getUniqueIndex(),null,null);
+        assertNotNull(sport2.getId());
+
+        assertNotSame(sport.getUniqueIndex(),sport2.getUniqueIndex());
     }
 }

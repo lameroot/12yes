@@ -21,8 +21,6 @@ public class ContactTest extends AbstractDomainTest {
     @Resource
     private ContactRepository contactRepository;
 
-    @Resource
-    private SpatialDatabaseService spatialDatabaseService;
 
     @Test
     public void testCreateContact() throws Exception{
@@ -37,12 +35,6 @@ public class ContactTest extends AbstractDomainTest {
                 .addContactParam(ContactParam.DATE_BIRTHDAY_PARAM, new Date(), ContactParam.Type.PROFILE, true);
         contact2.setLocation(30.0, 3.19);
         contactRepository.save(contact2);
-
-
-        boolean layer = spatialDatabaseService.containsLayer("location");
-        Layer layer1 = spatialDatabaseService.getLayer("location");
-        System.out.println("laye1 = " + layer1.getIndex().count());
-        System.out.println("layer = " + layer);
 
 
         EndResult<Contact> iterator = contactRepository.findWithinBoundingBox("location", 3.0,22.0,3.2,31.0);

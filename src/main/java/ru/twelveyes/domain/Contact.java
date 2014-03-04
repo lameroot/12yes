@@ -19,7 +19,7 @@ import java.util.Set;
 @NodeEntity
 public class Contact {
 
-    public final static String LOCATION_INDEX_NAME = "location";
+    public final static String LOCATION_INDEX_NAME = "locations";
 
     @GraphId
     private Long id;
@@ -74,7 +74,7 @@ public class Contact {
 
 
     public void setLocation(double lon, double lat) {
-        this.wkt = String.format("POINT( %s %s )",lon,lat);
+        this.wkt = String.format("POINT( %s %s )",lon,lat).replace(",",".");
     }
 
     public String getLocation() {

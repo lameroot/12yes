@@ -35,13 +35,9 @@ public class Neo4jConfig extends Neo4jConfiguration {
 //    }
     @Bean
     public GraphDatabaseService graphDatabaseService() {
+        // see https://github.com/neo4j/spatial
         SpringRestGraphDatabase database = new SpringRestGraphDatabase("http://localhost:7474/db/data/");
         return database;
-    }
-
-    @Bean
-    public SpatialDatabaseService spatialDatabaseService() {
-        return new SpatialDatabaseService(graphDatabaseService());
     }
 
 

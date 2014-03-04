@@ -32,7 +32,7 @@ public class Neo4jConfigTest extends AbstractConfigTest {
     @Resource
     protected TweetRepository tweetRepository;
     @Resource
-    protected ActivityRepository activityRepository;
+    protected ActivityRepository<Activity> activityRepository;
     @Resource
     protected CompanyRepository companyRepository;
     @Resource

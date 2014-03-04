@@ -60,12 +60,10 @@ public class ActivityService<A extends Activity> extends AbstractService<A>{
 
     public String findUniqueIndex(String propertyValue) {
         int count = 0;
-        System.out.println("find index = " + propertyValue);
-        //while ( null != activityRepository.findByPropertyValue(Activity.INDEX_PARAM,propertyValue) ) {
-        while ( null != findByIndex(propertyValue) ) {
+        if ( null != findByIndex(propertyValue) ) {
             Matcher matcher = pattern.matcher(propertyValue);
             if ( matcher.find() ) count = Integer.parseInt(matcher.group(0));
-            findUniqueIndex(propertyValue + count++);
+            propertyValue = findUniqueIndex(propertyValue + count++);
         }
         return propertyValue;
     }
