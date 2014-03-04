@@ -29,4 +29,8 @@ public class CompanyService extends ActivityService<Company> {
         companyRepository.save(company);
         return company;
     }
+
+    public Company findByIndex(String index) {
+        return companyRepository.findByIndex(index);
+    }
 }

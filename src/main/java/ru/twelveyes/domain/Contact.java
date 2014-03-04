@@ -45,6 +45,16 @@ public class Contact {
         return contactParams;
     }
 
+    public Set<ContactParam> getContactParams(ContactParam.ContactConditional conditional) throws IOException {
+        Set<ContactParam> contactParams = new HashSet<>();
+        for (Map.Entry<String, Object> entry : params.asMap().entrySet()) {
+            String value = (String)entry.getValue();
+            ContactParam contactParam = JsonUtil.toObject(ContactParam.class,value);
+            if ( conditional.check(contactParam) ) contactParams.add(contactParam);
+        }
+        return contactParams;
+    }
+
     public ContactParam getContactParam(String name) throws IOException {
         String value = (String)params.getProperty(name);
         if ( null == value ) return null;

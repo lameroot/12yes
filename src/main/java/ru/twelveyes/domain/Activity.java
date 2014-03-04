@@ -2,6 +2,7 @@ package ru.twelveyes.domain;
 
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.*;
+import org.springframework.data.neo4j.support.index.IndexType;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,8 +21,8 @@ public class Activity {
     @Indexed
     private String title;
     @GraphProperty
-    @Indexed(unique = true)
-    private String index; //индекс который формируется при создании, далее является опозновательным знаком для компаний как например %company
+    @Indexed(unique = true,indexType = IndexType.LABEL)
+    protected String index; //индекс который формируется при создании, далее является опозновательным знаком для компаний как например %company
     @RelatedTo(type = "ACTIVITY", direction = Direction.INCOMING)
     private Set<Activity> parents;
     @RelatedTo(type = "ACTIVITY", direction = Direction.OUTGOING)

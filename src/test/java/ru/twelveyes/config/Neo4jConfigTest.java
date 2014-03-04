@@ -71,6 +71,7 @@ public class Neo4jConfigTest extends AbstractConfigTest {
     protected Activity createActivity(String title, Activity parent) {
         Activity activity = new Activity();
         activity.setTitle(title);
+        activity.setIndex(title);
         activity.addParent(parent);
 
         return activity;

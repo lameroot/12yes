@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.neo4j.gis.spatial.Layer;
 import org.neo4j.gis.spatial.SpatialDatabaseService;
 import org.springframework.data.neo4j.conversion.EndResult;
+import ru.twelveyes.repository.CompanyRepository;
 import ru.twelveyes.repository.ContactRepository;
 import ru.twelveyes.util.GeoUtil;
 import ru.twelveyes.util.JsonUtil;
@@ -19,6 +20,7 @@ public class ContactTest extends AbstractDomainTest {
 
     @Resource
     private ContactRepository contactRepository;
+
     @Resource
     private SpatialDatabaseService spatialDatabaseService;
 
@@ -31,7 +33,8 @@ public class ContactTest extends AbstractDomainTest {
 
 
         Contact contact2 = new Contact();
-        contact2.addContactParam(ContactParam.FIRST_NAME_PARAM, "stas2", ContactParam.Type.PROFILE).addContactParam(ContactParam.DATE_BIRTHDAY_PARAM,new Date(), ContactParam.Type.PROFILE,true);
+        contact2.addContactParam(ContactParam.FIRST_NAME_PARAM, "stas2", ContactParam.Type.PROFILE)
+                .addContactParam(ContactParam.DATE_BIRTHDAY_PARAM, new Date(), ContactParam.Type.PROFILE, true);
         contact2.setLocation(30.0, 3.19);
         contactRepository.save(contact2);
 
@@ -48,6 +51,15 @@ public class ContactTest extends AbstractDomainTest {
             System.out.println("sss: " + contact1.getLocation() + ":" + contact1.getContactParam(ContactParam.FIRST_NAME_PARAM));
             for (ContactParam param : contact1.getContactParams()) {
                 System.out.println("params = " + param);
+            }
+            for (ContactParam contactParam : contact1.getContactParams(new ContactParam.ContactConditional() {
+                @Override
+                public boolean check(ContactParam param) {
+                    if ( !param.isPrivate() ) return false;
+                    return true;
+                }
+            })) {
+                System.out.println("params[only public] = " + contactParam);
             }
             System.out.println(GeoUtil.parseWellKnowText(Point.class,contact1.getLocation()));
 

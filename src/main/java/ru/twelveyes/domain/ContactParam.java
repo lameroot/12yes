@@ -21,6 +21,12 @@ public class ContactParam {
     public final static String CITY_PARAM = "city";
     public final static String UNDERGROUND_PARAM = "underground";
 
+    public enum Type {
+        GEO,
+        PROFILE,
+        ADDRESS
+    }
+
     private String name;
     private Object value;
     private boolean isPrivate;
@@ -28,21 +34,13 @@ public class ContactParam {
 
     private ContactParam(){}
     public ContactParam(String name, Object value, Type paramType) {
-        this.name = name;
-        this.value = value;
-        this.paramType = paramType;
+        this(name, value, paramType,false);
     }
     public ContactParam(String name, Object value, Type paramType, boolean isPrivate) {
         this.name = name;
         this.value = value;
         this.isPrivate = isPrivate;
         this.paramType = paramType;
-    }
-
-    public enum Type {
-        GEO,
-        PROFILE,
-        ADDRESS
     }
 
     public String getName() {
@@ -107,5 +105,9 @@ public class ContactParam {
         sb.append(", paramType=").append(paramType);
         sb.append('}');
         return sb.toString();
+    }
+
+    public static interface ContactConditional {
+        public boolean check(ContactParam param);
     }
 }
