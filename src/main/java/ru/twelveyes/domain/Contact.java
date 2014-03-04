@@ -35,6 +35,17 @@ public class Contact {
         params.setProperty(name, JsonUtil.toJson(contactParam));
         return this;
     }
+    public Contact updateContactParam(String name, String newValue) throws IOException{
+        ContactParam contactParam = getContactParam(name);
+        if ( null == contactParam ) return this;
+        contactParam.setValue(newValue);
+        params.setProperty(name,JsonUtil.toJson(contactParam));
+        return this;
+    }
+    public Contact removeContactParam(String name) {
+        params.removeProperty(name);
+        return this;
+    }
     public Set<ContactParam> getContactParams() throws IOException {
         Set<ContactParam> contactParams = new HashSet<>();
         for (Map.Entry<String, Object> entry : params.asMap().entrySet()) {

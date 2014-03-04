@@ -3,7 +3,6 @@ package ru.twelveyes.service;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.stereotype.Service;
 import ru.twelveyes.domain.Activity;
 import ru.twelveyes.repository.ActivityRepository;
@@ -26,16 +25,20 @@ public class ActivityService<A extends Activity> extends AbstractService<A>{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private Pattern pattern = Pattern.compile("(\\d+$)");
 
-    public A create(String title, String uniqueIndex, Activity...parents) {
+    public A findByIndex(String index) {
+        return activityRepository.findByUniqueIndex(index);
+    }
+
+    public A create(A activity, String title, String uniqueIndex, Activity...parents) {
         if (StringUtils.isBlank(title) ) return null;
-        Activity activity = new Activity();
         activity.setTitle(title);
         String index = TranslitUtil.toTranslit(title.toLowerCase());
         if ( StringUtils.isNotBlank(uniqueIndex) ) index = uniqueIndex;
-        activity.setIndex(findUniqueIndex(index));
+        activity.setUniqueIndex(findUniqueIndex(index));
         for (Activity parent : parents) {
             activity.addParent(parent);
         }
+        logger.debug("Try save activity with uniqueIndex: {}",uniqueIndex);
         activityRepository.save((A) activity);
         logger.debug("Activity {} successfully saved",activity);
         return (A)activity;
@@ -57,7 +60,9 @@ public class ActivityService<A extends Activity> extends AbstractService<A>{
 
     public String findUniqueIndex(String propertyValue) {
         int count = 0;
-        while ( null != activityRepository.findByPropertyValue(Activity.INDEX_PARAM,propertyValue) ) {
+        System.out.println("find index = " + propertyValue);
+        //while ( null != activityRepository.findByPropertyValue(Activity.INDEX_PARAM,propertyValue) ) {
+        while ( null != findByIndex(propertyValue) ) {
             Matcher matcher = pattern.matcher(propertyValue);
             if ( matcher.find() ) count = Integer.parseInt(matcher.group(0));
             findUniqueIndex(propertyValue + count++);

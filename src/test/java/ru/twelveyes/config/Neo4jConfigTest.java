@@ -12,7 +12,6 @@ import ru.twelveyes.service.ProfileService;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * User: Krainov
@@ -71,7 +70,7 @@ public class Neo4jConfigTest extends AbstractConfigTest {
     protected Activity createActivity(String title, Activity parent) {
         Activity activity = new Activity();
         activity.setTitle(title);
-        activity.setIndex(title);
+        activity.setUniqueIndex(title);
         activity.addParent(parent);
 
         return activity;

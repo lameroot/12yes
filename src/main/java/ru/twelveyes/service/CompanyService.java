@@ -1,10 +1,10 @@
 package ru.twelveyes.service;
 
-import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.stereotype.Service;
 import ru.twelveyes.domain.Activity;
 import ru.twelveyes.domain.Company;
 import ru.twelveyes.domain.Contact;
+import ru.twelveyes.domain.ServiceDetail;
 import ru.twelveyes.repository.CompanyRepository;
 
 import javax.annotation.Resource;
@@ -22,7 +22,8 @@ public class CompanyService extends ActivityService<Company> {
 
     public Company create(String title, String uniqueIndex, Contact contact, Activity...parents) {
         if ( null == contact ) return null;
-        Company company = create(title, uniqueIndex, parents);
+        Company company = create(new Company(),title, uniqueIndex, parents);
+
         companyRepository.save(company);
         template.save(contact);
         company.setContact(contact);
@@ -30,7 +31,21 @@ public class CompanyService extends ActivityService<Company> {
         return company;
     }
 
+    public void fetchContact(Company company) {
+        if ( null == company ) return;
+        template.fetch(company.getContact());
+    }
+
+    public Company update(Company company) {
+        return super.update(company);
+    }
+
     public Company findByIndex(String index) {
-        return companyRepository.findByIndex(index);
+        //return companyRepository.findByUniqueIndex(index);
+        return super.findByIndex(index);
+    }
+
+    public Company addService(Company company, ServiceDetail serviceDetail) {
+        return null;
     }
 }

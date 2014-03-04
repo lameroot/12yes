@@ -29,9 +29,14 @@ public class Neo4jConfig extends Neo4jConfiguration {
 
     private static final String DB_PATH = "data/graph.db";
 
+//    @Bean
+//    public GraphDatabaseService graphDatabaseService() {
+//        return new GraphDatabaseFactory().newEmbeddedDatabase(DB_PATH);
+//    }
     @Bean
     public GraphDatabaseService graphDatabaseService() {
-        return new GraphDatabaseFactory().newEmbeddedDatabase(DB_PATH);
+        SpringRestGraphDatabase database = new SpringRestGraphDatabase("http://localhost:7474/db/data/");
+        return database;
     }
 
     @Bean
@@ -40,9 +45,5 @@ public class Neo4jConfig extends Neo4jConfiguration {
     }
 
 
-//    @Bean
-//    public GraphDatabaseService graphDatabaseService() {
-//        SpringRestGraphDatabase database = new SpringRestGraphDatabase("http://localhost:7474/db/data/");
-//        return database;
-//    }
+
 }

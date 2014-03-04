@@ -12,9 +12,9 @@ import ru.twelveyes.domain.Contact;
  * Date: 17.02.14
  * Time: 18:05
  */
-public interface CompanyRepository extends GraphRepository<Company>, RelationshipOperationsRepository<Company>, ActivityRepository<Company> {
+public interface CompanyRepository extends ActivityRepository<Company> {
 
     //public Iterable<Company> findAllChildCompany(Activity parent);//поиск по атрибутам (просто поиск делать не надо)
 
-    public Company findByIndex(String index);
+    //public Company findByUniqueIndex(String index);
 }

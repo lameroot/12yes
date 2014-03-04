@@ -59,11 +59,11 @@ public class ContactParam {
         return paramType;
     }
 
-    private void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
 
-    private void setValue(Object value) {
+    protected void setValue(Object value) {
         this.value = value;
     }
 
@@ -71,7 +71,7 @@ public class ContactParam {
         isPrivate = aPrivate;
     }
 
-    private void setParamType(Type paramType) {
+    protected void setParamType(Type paramType) {
         this.paramType = paramType;
     }
 

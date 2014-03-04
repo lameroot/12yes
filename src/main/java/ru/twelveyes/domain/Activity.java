@@ -22,7 +22,7 @@ public class Activity {
     private String title;
     @GraphProperty
     @Indexed(unique = true,indexType = IndexType.LABEL)
-    protected String index; //индекс который формируется при создании, далее является опозновательным знаком для компаний как например %company
+    protected String uniqueIndex; //индекс который формируется при создании, далее является опозновательным знаком для компаний как например %company
     @RelatedTo(type = "ACTIVITY", direction = Direction.INCOMING)
     private Set<Activity> parents;
     @RelatedTo(type = "ACTIVITY", direction = Direction.OUTGOING)
@@ -78,12 +78,12 @@ public class Activity {
         return this;
     }
 
-    public String getIndex() {
-        return index;
+    public String getUniqueIndex() {
+        return uniqueIndex;
     }
 
-    public void setIndex(String index) {
-        this.index = index;
+    public void setUniqueIndex(String index) {
+        this.uniqueIndex = index;
     }
 
     @Override

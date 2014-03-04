@@ -5,7 +5,9 @@ import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.annotation.RelatedToVia;
+import org.springframework.data.neo4j.support.Neo4jTemplate;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -18,8 +20,9 @@ public class Company extends Activity implements Contactable{
     private Contact contact;
     @Fetch @RelatedToVia(type = "RATED", direction = Direction.INCOMING)
     private Iterable<Rating> ratings;
+    @Fetch
     @RelatedToVia(direction = Direction.OUTGOING, type = "SERVICE")
-    private Set<ServiceDetails> services;
+    private Set<ServiceDetail> services = new HashSet<>();
 
     @Override
     public Long getOwnerId() {
@@ -32,6 +35,10 @@ public class Company extends Activity implements Contactable{
 
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+
+    public Set<ServiceDetail> getServices() {
+        return services;
     }
 
     public int getStars() {
@@ -56,9 +63,13 @@ public class Company extends Activity implements Contactable{
         return this;
     }
 
-
-
-
+    public ServiceDetail addService(Neo4jTemplate template, Service service, Double lowPrice, Double highPrice, ServiceDetail.WorkingDay...workingDays) {
+        ServiceDetail serviceDetail = template.createRelationshipBetween(this, service, ServiceDetail.class,"SERVICE",false);
+        serviceDetail.price(lowPrice,highPrice);
+        serviceDetail.addWorkingDays(workingDays);
+        services.add(template.save(serviceDetail));
+        return serviceDetail;
+    }
 
     @Override
     public String toString() {

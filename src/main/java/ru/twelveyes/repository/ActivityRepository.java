@@ -10,7 +10,7 @@ import ru.twelveyes.domain.Activity;
  */
 public interface ActivityRepository<A extends Activity> extends GraphRepository<A> {
 
-//    public A findByIndex(String index);
+    public A findByUniqueIndex(String index);
 //    public A findByTitleLike(String title);
 //    public Iterable<A> findAllChildActivities(A parent);
 
