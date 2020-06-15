@@ -12,7 +12,7 @@
         <app.dir>${basedir}/src/main/webapp</app.dir>
         <js.debug>true</js.debug>
         <js.compiler>yui</js.compiler>
-        <spring.version>4.0.0.RELEASE</spring.version>
+        <spring.version>5.2.7.RELEASE</spring.version>
         <spring-data-neo4j.version>3.0.0.RELEASE</spring-data-neo4j.version>
         <spring-data.version>1.4.2.RELEASE</spring-data.version>
         <hibernate.version>4.2.8.Final</hibernate.version>
